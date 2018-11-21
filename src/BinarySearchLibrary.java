@@ -50,10 +50,9 @@ public class BinarySearchLibrary {
 				while(mid >= 0 && a == 0){
 					mid--;
 				}
-				System.out.println("returning " + (mid+1));
+	
 				return mid + 1;
 			}
-			
 		}
 		return -1;
 	}
@@ -91,17 +90,13 @@ public class BinarySearchLibrary {
 				high = mid-1;
 			}
 			else {
-				System.out.println("in while loop");
 
 				 while(mid < list.size() && a == 0) {
-					 System.out.println("in while loop");
 	                 mid++;
 	             }
-				 System.out.println("outside while loop and returning " + (mid-1));
 	             return mid - 1;
 			}
 		}
-		System.out.println("returning -1");
 		return -1;
 	}
 }
