@@ -105,7 +105,12 @@ public class BinarySearchAutocomplete implements Autocompletor {
 	 */
 	@Override
 	public List<Term> topMatches(String prefix, int k) {
-
+		
+		if(prefix == null) {
+			throw new NullPointerException("prefix is null");
+		}
+		
+		
 		ArrayList<Term> list = new ArrayList<>();
 		return list;
 	}

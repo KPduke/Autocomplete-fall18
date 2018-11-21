@@ -92,33 +92,25 @@ public class Term implements Comparable<Term> {
 		 *            - Two Terms whose words are being compared
 		 */
 		public int compare(Term v, Term w) {
-			
-			String stringtermV = v.toString();
-			String stringtermW = w.toString();
-			char vee = 0; char ww = 0;
-				
-			
-			for(int i = 0; i < this.myPrefixSize + 1; i++) {
-				
-				if(i > stringtermV.length() || i > stringtermW.length()) {
-					if(stringtermV.length() < stringtermW.length()) {
-						return -1;
-						
-					}	else if(stringtermV.length() > stringtermW.length()) {
-						return 1;
-					}
-					return 0;
+			int comp = 0;
+			int countby = this.myPrefixSize;
+			for(int i = 0; i < countby+1; i++) {		
+				if(v.getWord().length()  < this.myPrefixSize &&
+						! (w.getWord().length() < this.myPrefixSize)) {
+					countby = v.getWord().length();
 				}
-	
-				vee  = stringtermV.charAt(vee);
-				ww = stringtermW.charAt(ww);
-			
-				if(vee > ww ) return 1;
-				if(vee < ww) return -1;
+				else if (w.getWord().length() < this.myPrefixSize && 
+						! ( v.getWord().length() < this.myPrefixSize)){
+					countby = w.getWord().length();
+				}
+				char vee = v.getWord().charAt(i);
+				char www = w.getWord().charAt(i);
 				
+				if(vee - www !=0) {
+					comp = vee - www;
+				}
 			}
-			
-			return 0;
+			return comp;
 		}
 	}
 
@@ -131,12 +123,12 @@ public class Term implements Comparable<Term> {
 	
 	public static class ReverseWeightOrder implements Comparator<Term> {
 		public int compare(Term v, Term w) {
-			//TODO: implement compare
 			
 			if(v.getWeight() > w.getWeight()) return -1;
-			if(v.getWeight() == w.getWeight()) return 0;
-	
-			return 1;
+			if(v.getWeight() < w.getWeight()) return 1;
+			else {
+				return 0;
+			}
 		}
 	}
 
@@ -148,12 +140,12 @@ public class Term implements Comparable<Term> {
 	 */
 	public static class WeightOrder implements Comparator<Term> {
 		public int compare(Term v, Term w) {
-			// TODO: implement compare
 			
 			if(v.getWeight() < w.getWeight()) return -1;
-			if(v.getWeight() == w.getWeight()) return 0;
-			
-			return -1;
+			if(v.getWeight() > w.getWeight()) return 1;
+			else {
+				return 0;
+			}
 		}
 	}
 }

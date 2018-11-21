@@ -37,22 +37,23 @@ public class BinarySearchLibrary {
 
  
 		while(low+ 1 != high) {
-		
+			
 			int mid = (high + low) /2;
-			if(comp.compare(list.get(mid), target) < 0) {
+			int a = comp.compare(list.get(mid), target);
+			if(a < 0) {
 				low = mid;
 			}
-			else if(comp.compare(list.get(mid), target) > 0) {
+			else if(a > 0) {
 				high = mid;
 			}
 			else{
-				System.out.println("in else loop");
-				while(mid >= 0 && comp.compare(list.get(mid), target) == 0){
-					System.out.println("in while");
+				while(mid >= 0 && a == 0){
 					mid--;
 				}
+				System.out.println("returning " + (mid+1));
 				return mid + 1;
 			}
+			
 		}
 		return -1;
 	}
@@ -79,26 +80,28 @@ public class BinarySearchLibrary {
 		int high = list.size()-1;
 		//target in (low,high]
 		
-		while(low + 1 != high) {
+		while(low <= high) {
 			
 			int mid = (high + low) /2;
-			if(comp.compare(list.get(mid), target) < 0) {
-				low = mid-1;
+			int a = comp.compare(list.get(mid), target);
+			if(a < 0) {
+				low = mid+1;
 			}
-			else if(comp.compare(list.get(mid), target) > 0) {
-				high = mid+1;
+			else if(a > 0) {
+				high = mid-1;
 			}
 			else {
 				System.out.println("in while loop");
 
-				 while(mid < list.size() && comp.compare(list.get(mid), target) == 0) {
+				 while(mid < list.size() && a == 0) {
 					 System.out.println("in while loop");
 	                 mid++;
 	             }
-				 System.out.println("outside while loop and returning" + (mid-1));
+				 System.out.println("outside while loop and returning " + (mid-1));
 	             return mid - 1;
 			}
 		}
+		System.out.println("returning -1");
 		return -1;
 	}
 }
