@@ -14,7 +14,6 @@ public class BinarySearchLibrary {
 		}
 		return index+1;
 	}
-	
 	/**
 	 * Uses binary search to find the index of the first object in parameter
 	 * list -- the first object o such that comp.compare(o,target) == 0.
@@ -27,18 +26,37 @@ public class BinarySearchLibrary {
 	 * and there is no index < i such that this is true. Return -1
 	 * if there is no such object in list.
 	 */
-	
+
 	public static <T>
-    	int firstIndex(List<T> list, 
-	               	T target, Comparator<T> comp) {
+	int firstIndex(List<T> list, 
+               	  T target, Comparator<T> comp) {
 		
 		int low = -1;
-		int high = list.size()-1;
-		// (low,high] contains target
-		// TODO: complete method
+		int high = list.size();
+		// target in [low,high)
+
+ 
+		while(low+ 1 != high) {
 		
+			int mid = (high + low) /2;
+			if(comp.compare(list.get(mid), target) < 0) {
+				low = mid;
+			}
+			else if(comp.compare(list.get(mid), target) > 0) {
+				high = mid;
+			}
+			else{
+				System.out.println("in else loop");
+				while(mid >= 0 && comp.compare(list.get(mid), target) == 0){
+					System.out.println("in while");
+					mid--;
+				}
+				return mid + 1;
+			}
+		}
 		return -1;
 	}
+	
 
 	/**
 	 * Uses binary search to find the index of the last object in parameter
@@ -52,16 +70,35 @@ public class BinarySearchLibrary {
 	 * and there is no index > i such that this is true. Return -1
 	 * if there is no such object in list.
 	 */
-	public static <T>
-	int lastIndex(List<T> list, 
-               	  T target, Comparator<T> comp) {
+	
+		public static <T>
+		int lastIndex(List<T> list, 
+	               	T target, Comparator<T> comp) {
 		
 		int low = 0;
-		int high = list.size();
+		int high = list.size()-1;
+		//target in (low,high]
 		
-		// target in [low,high)
-		// TODO: complete method
+		while(low + 1 != high) {
+			
+			int mid = (high + low) /2;
+			if(comp.compare(list.get(mid), target) < 0) {
+				low = mid-1;
+			}
+			else if(comp.compare(list.get(mid), target) > 0) {
+				high = mid+1;
+			}
+			else {
+				System.out.println("in while loop");
+
+				 while(mid < list.size() && comp.compare(list.get(mid), target) == 0) {
+					 System.out.println("in while loop");
+	                 mid++;
+	             }
+				 System.out.println("outside while loop and returning" + (mid-1));
+	             return mid - 1;
+			}
+		}
 		return -1;
 	}
-	
 }

@@ -28,6 +28,7 @@ public class TestBinarySearch {
 			assertEquals("wrong first index for "+target,results[k],index);
 		}
 	}
+
 	
 	@Test
 	public void testLastIndex() {

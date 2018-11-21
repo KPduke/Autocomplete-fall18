@@ -31,6 +31,13 @@ public class Term implements Comparable<Term> {
 		
 		myWord = word;
 		myWeight = weight;
+		
+		if(myWord == null) {
+			throw new NullPointerException("arguement is null " + word);
+		}
+		if(myWeight < 0) {
+			throw new IllegalArgumentException("negative weight " + weight);
+		}
 	}
 	
 	/**
@@ -85,11 +92,34 @@ public class Term implements Comparable<Term> {
 		 *            - Two Terms whose words are being compared
 		 */
 		public int compare(Term v, Term w) {
-			// TODO: Implement compare
+			
+			String stringtermV = v.toString();
+			String stringtermW = w.toString();
+			char vee = 0; char ww = 0;
+				
+			
+			for(int i = 0; i < this.myPrefixSize + 1; i++) {
+				
+				if(i > stringtermV.length() || i > stringtermW.length()) {
+					if(stringtermV.length() < stringtermW.length()) {
+						return -1;
+						
+					}	else if(stringtermV.length() > stringtermW.length()) {
+						return 1;
+					}
+					return 0;
+				}
+	
+				vee  = stringtermV.charAt(vee);
+				ww = stringtermW.charAt(ww);
+			
+				if(vee > ww ) return 1;
+				if(vee < ww) return -1;
+				
+			}
 			
 			return 0;
 		}
-	
 	}
 
 	/**
@@ -98,11 +128,15 @@ public class Term implements Comparable<Term> {
 	 * Autocompletor
 	 *
 	 */
+	
 	public static class ReverseWeightOrder implements Comparator<Term> {
 		public int compare(Term v, Term w) {
-			// TODO: implement compare
+			//TODO: implement compare
 			
-			return 0;
+			if(v.getWeight() > w.getWeight()) return -1;
+			if(v.getWeight() == w.getWeight()) return 0;
+	
+			return 1;
 		}
 	}
 
@@ -116,7 +150,10 @@ public class Term implements Comparable<Term> {
 		public int compare(Term v, Term w) {
 			// TODO: implement compare
 			
-			return 0;
+			if(v.getWeight() < w.getWeight()) return -1;
+			if(v.getWeight() == w.getWeight()) return 0;
+			
+			return -1;
 		}
 	}
 }
