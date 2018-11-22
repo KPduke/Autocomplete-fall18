@@ -109,9 +109,23 @@ public class BinarySearchAutocomplete implements Autocompletor {
 		if(prefix == null) {
 			throw new NullPointerException("prefix is null");
 		}
-		
-		
+		Comparator<Term> comp = new Term.PrefixOrder(k);
 		ArrayList<Term> list = new ArrayList<>();
+		for(Term s : myTerms) {
+			list.add(s);
+		}
+		
+		int first = BinarySearchLibrary.firstIndex(list, comp, comp.PrefixOrder);
+		
+		int last = BinarySearchLibrary.lastIndex(list, comp, comp.PrefixOrder);
+		
+		ArrayList<Term> samePre = new ArrayList<>();
+
+		for(int i = first; i <= last; i++) {
+			samePre.add(list.get(i));
+		}
+		
+		
 		return list;
 	}
 }

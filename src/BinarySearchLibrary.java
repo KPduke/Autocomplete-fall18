@@ -47,12 +47,10 @@ public class BinarySearchLibrary {
 				while(mid>=0 && comp.compare(list.get(mid), target) == 0){
 					mid--;
 				}
-				System.out.println("mid+1 == " + (mid +1));
 				return (mid+1);
-			}	
+			}
+			if(comp.compare(list.get(high), target) == 0) return high;
 		}
-		if(comp.compare(list.get(high), target) == 0) return high;
-		System.out.println(" returning -1");
 		return -1;
 }
 	
