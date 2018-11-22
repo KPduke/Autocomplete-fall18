@@ -28,17 +28,17 @@ public class TestBinarySearch {
 			assertEquals("wrong first index for "+target,results[k],index);
 		}
 	}
-}
+
 	
-//	@Test
-//	public void testLastIndex() {
-//		String[] keys = {"apple","cherry","lemon","orange","zoo"};
-//		int[] results = {3,9,-1,10,22};
-//		for(int k=0; k < keys.length; k++) {
-//			String target = keys[k];
-//			int index = BinarySearchLibrary.lastIndex(myList, target, Comparator.naturalOrder());
-//			assertEquals("wrong first index for "+target,results[k],index);
-//		}
-//	}
-//
-//}
+	@Test
+	public void testLastIndex() {
+		String[] keys = {"apple","cherry","lemon","orange","zoo"};
+		int[] results = {3,9,-1,10,22};
+		for(int k=0; k < keys.length; k++) {
+			String target = keys[k];
+			int index = BinarySearchLibrary.lastIndex(myList, target, Comparator.naturalOrder());
+			assertEquals("wrong first index for "+target,results[k],index);
+		}
+	}
+
+}

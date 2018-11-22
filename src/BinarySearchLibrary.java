@@ -30,7 +30,7 @@ public class BinarySearchLibrary {
 	public static <T>
 	int firstIndex(List<T> list, 
                	  T target, Comparator<T> comp) {
-		int low = 0;
+		int low = -1;
 		int high = list.size();
 		// target in [low,high)
 		

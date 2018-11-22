@@ -114,10 +114,8 @@ public class BinarySearchAutocomplete implements Autocompletor {
 		for(Term s : myTerms) {
 			list.add(s);
 		}
-		
-		int first = BinarySearchLibrary.firstIndex(list, comp, comp.PrefixOrder);
-		
-		int last = BinarySearchLibrary.lastIndex(list, comp, comp.PrefixOrder);
+		int first = BinarySearchLibrary.firstIndex(list, comp, T.PrefixOrder);
+		int last = BinarySearchLibrary.lastIndex(list, comp, Term.PrefixOrder(k));
 		
 		ArrayList<Term> samePre = new ArrayList<>();
 
@@ -125,6 +123,7 @@ public class BinarySearchAutocomplete implements Autocompletor {
 			samePre.add(list.get(i));
 		}
 		
+		Term.ReverseWeightOrder(samePre);
 		
 		return list;
 	}
