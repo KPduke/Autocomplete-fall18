@@ -98,8 +98,8 @@ public class Term implements Comparable<Term> {
 			int wSize = w.getWord().length();
 			
 			
-			for(int i = 0; i < countby+1; i++) {		
-				if(i > vSize || i > wSize) {
+			for(int i = 0; i < countby; i++) {		
+				if((i+1) > vSize || (i+1) > wSize) {
 					if(vSize < wSize) {
 						return -1;
 					} else if(vSize > wSize) {
@@ -108,16 +108,16 @@ public class Term implements Comparable<Term> {
 						return 0;
 					}
 				}
-				if(v.getWord().length()  < this.myPrefixSize ||
-						(w.getWord().length() < this.myPrefixSize)) {
-					if(v.getWord().length() < w.getWord().length()) {
-						
-						countby = v.getWord().length();
-					}
-					else {
-						countby = w.getWord().length();
-					}
-			}
+//				if(v.getWord().length()  < this.myPrefixSize ||
+//						(w.getWord().length() < this.myPrefixSize)) {
+//					if(v.getWord().length() < w.getWord().length()) {
+//						
+//						countby = v.getWord().length();
+//					}
+//					else {
+//						countby = w.getWord().length();
+//					}
+//			}
 				char vee = v.getWord().charAt(i);
 				char www = w.getWord().charAt(i);
 				
