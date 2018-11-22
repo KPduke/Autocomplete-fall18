@@ -98,7 +98,7 @@ public class Term implements Comparable<Term> {
 			int wSize = w.getWord().length();
 			
 			
-			for(int i = 0; i < countby; i++) {		
+			for(int i = 0; i < countby+1; i++) {		
 				if(i > vSize || i > wSize) {
 					if(vSize < wSize) {
 						return -1;
@@ -117,7 +117,6 @@ public class Term implements Comparable<Term> {
 					else {
 						countby = w.getWord().length();
 					}
-				
 			}
 				char vee = v.getWord().charAt(i);
 				char www = w.getWord().charAt(i);
