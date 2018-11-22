@@ -122,13 +122,10 @@ public class BinarySearchAutocomplete implements Autocompletor {
 		int first = BinarySearchLibrary.firstIndex(list, newbie, a);
 		int last = BinarySearchLibrary.lastIndex(list, newbie, a);
 				
-		for(int i = first; i <= last; i++) {
+		for(int i = first-1; i <= last-1; i++) {
 			samePre.add(list.get(i));
 		}
-		
-		
 		Comparator<Term> c = new Term.ReverseWeightOrder();
-		
 		samePre.sort(c);
 		
 		if(k > samePre.size()) {k = samePre.size();}
