@@ -105,12 +105,10 @@ public class BinarySearchAutocomplete implements Autocompletor {
 	 */
 	@Override
 	public List<Term> topMatches(String prefix, int k) {
-		
 		if(prefix == null) {
 			throw new NullPointerException("prefix is null");
 		}
 
-		
 		ArrayList<Term> list = new ArrayList<>();
 		for(Term s : myTerms) {
 			list.add(s);
@@ -128,18 +126,15 @@ public class BinarySearchAutocomplete implements Autocompletor {
 			samePre.add(list.get(i));
 		}
 		
-	
 		
 		Comparator<Term> c = new Term.ReverseWeightOrder();
 		
 		samePre.sort(c);
 		
-		for(int i = 0; i < k-1; i++) {
-			
+		if(k > samePre.size()) {k = samePre.size();}
+		for(int i = 0; i < k; i++) {
 			returnlist.add(samePre.get(i));
-//			System.out.println(samePre.get(i));
 		}
-		System.out.println(returnlist);
 		return returnlist;
 	}
 }
