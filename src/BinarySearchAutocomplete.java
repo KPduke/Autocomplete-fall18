@@ -114,8 +114,8 @@ public class BinarySearchAutocomplete implements Autocompletor {
 		for(Term s : myTerms) {
 			list.add(s);
 		}
-		int first = BinarySearchLibrary.firstIndex(list, comp, T.PrefixOrder);
-		int last = BinarySearchLibrary.lastIndex(list, comp, Term.PrefixOrder(k));
+		int first = BinarySearchLibrary.firstIndex(list, new Term(prefix,0), Term.PrefixOrder(prefix.length()));
+		int last = BinarySearchLibrary.lastIndex(list, new Term(prefix, 0), Term.PrefixOrder(prefix.length()));
 		
 		ArrayList<Term> samePre = new ArrayList<>();
 

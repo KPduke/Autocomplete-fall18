@@ -94,17 +94,31 @@ public class Term implements Comparable<Term> {
 		public int compare(Term v, Term w) {
 			int comp = 0;
 			int countby = this.myPrefixSize;
+			int vSize = v.getWord().length();
+			int wSize = w.getWord().length();
+			
 			
 			for(int i = 0; i < countby; i++) {		
+				if(i > vSize || i > wSize) {
+					if(vSize < wSize) {
+						return -1;
+					} else if(vSize > wSize) {
+						return 1;
+					} else {
+						return 0;
+					}
+				}
 				if(v.getWord().length()  < this.myPrefixSize ||
 						(w.getWord().length() < this.myPrefixSize)) {
 					if(v.getWord().length() < w.getWord().length()) {
+						
 						countby = v.getWord().length();
 					}
 					else {
 						countby = w.getWord().length();
 					}
-				}
+				
+			}
 				char vee = v.getWord().charAt(i);
 				char www = w.getWord().charAt(i);
 				
