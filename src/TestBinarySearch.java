@@ -28,8 +28,9 @@ public class TestBinarySearch {
 			assertEquals("wrong first index for "+target,results[k],index);
 		}
 	}
+}
 	
-	//@Test
+//	@Test
 //	public void testLastIndex() {
 //		String[] keys = {"apple","cherry","lemon","orange","zoo"};
 //		int[] results = {3,9,-1,10,22};
@@ -39,5 +40,5 @@ public class TestBinarySearch {
 //			assertEquals("wrong first index for "+target,results[k],index);
 //		}
 //	}
-
-}
+//
+//}

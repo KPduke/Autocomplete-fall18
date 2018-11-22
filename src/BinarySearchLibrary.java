@@ -30,12 +30,11 @@ public class BinarySearchLibrary {
 	public static <T>
 	int firstIndex(List<T> list, 
                	  T target, Comparator<T> comp) {
-		int low = -1;
+		int low = 0;
 		int high = list.size();
 		// target in [low,high)
 		
-		while(low + 1 != high) {
-			
+		while(low +1 != high) {
 			int mid = (high + low) / 2;
 			int a = comp.compare(list.get(mid), target);
 			if(a < 0) {
@@ -44,15 +43,12 @@ public class BinarySearchLibrary {
 			else if(a > 0) {
 				high = mid;
 			}
-			else {
-				while(mid>=0 && a == 0){
+			else if (a ==0) {
+				while(mid>=0 && comp.compare(list.get(mid), target) == 0){
 					mid--;
 				}
-				return mid + 1;
+				return (mid+1);
 			}	
-//			if(comp.compare(list.get(high), target) == 0) {
-//				return high;
-//			}
 			
 		}
 		return -1;
@@ -91,7 +87,7 @@ public class BinarySearchLibrary {
 				high = mid-1;
 			}
 			else {
-				while(mid < list.size() && a == 0) {
+				while(mid < list.size() && comp.compare(list.get(mid), target) == 0) {
 	            	 mid++;
 	             }
 				return mid - 1;
