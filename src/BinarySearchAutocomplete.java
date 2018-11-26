@@ -122,7 +122,8 @@ public class BinarySearchAutocomplete implements Autocompletor {
 	
 		int first = BinarySearchLibrary.firstIndex(list, newbie, a);
 		int last = BinarySearchLibrary.lastIndex(list, newbie, a);
-				
+		
+		if(first == -1) {return samePre;}
 		for(int i = first; i <= last; i++) {
 			samePre.add(list.get(i));
 		}

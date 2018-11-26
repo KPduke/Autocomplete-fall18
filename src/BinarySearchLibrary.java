@@ -32,7 +32,7 @@ public class BinarySearchLibrary {
                	  T target, Comparator<T> comp) {
 		int low = -1;
 		int high = list.size() - 1;
-		//if(list == null) {return -1;}
+		if(list.size()==0) {return -1;}
 		
 		while(low +1 != high) {
 			int mid = (high + low) / 2;
@@ -71,7 +71,7 @@ public class BinarySearchLibrary {
 		
 		int low = 0;
 		int high = list.size();
-		//if(list == null) {return -1;}
+		if(list.size() ==0) {return -1;}
 		
 		while(low + 1 != high) {
 			
