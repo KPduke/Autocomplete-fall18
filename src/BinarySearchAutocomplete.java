@@ -105,6 +105,7 @@ public class BinarySearchAutocomplete implements Autocompletor {
 	 */
 	@Override
 	public List<Term> topMatches(String prefix, int k) {
+		if(k<0) { throw new IllegalArgumentException();}
 		if(prefix == null) {
 			throw new NullPointerException("prefix is null");
 		}
@@ -131,10 +132,7 @@ public class BinarySearchAutocomplete implements Autocompletor {
 		if(k > samePre.size()) {k = samePre.size();}
 		for(int i = 0; i < k; i++) {
 			returnlist.add(samePre.get(i));
-			
-		if(k < 0) {
-			return 
-		}
+
 		}
 		return returnlist;
 	}

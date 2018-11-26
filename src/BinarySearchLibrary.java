@@ -45,7 +45,7 @@ public class BinarySearchLibrary {
 			}
 		
 		}
-		if(list.get(high) == target) {
+		if(comp.compare(list.get(high), target) == 0) {
 			return high;
 		}
 		return -1;
@@ -84,7 +84,7 @@ public class BinarySearchLibrary {
 				high = mid-1;
 			}
 		}
-		if(list.get(low) == target) {
+		if(comp.compare(list.get(low),target) ==0) {
 			return low;
 			}
 		return -1;
