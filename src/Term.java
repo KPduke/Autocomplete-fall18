@@ -108,16 +108,7 @@ public class Term implements Comparable<Term> {
 						return 0;
 					}
 				}
-//				if(v.getWord().length()  < this.myPrefixSize ||
-//						(w.getWord().length() < this.myPrefixSize)) {
-//					if(v.getWord().length() < w.getWord().length()) {
-//						
-//						countby = v.getWord().length();
-//					}
-//					else {
-//						countby = w.getWord().length();
-//					}
-//			}
+
 				char vee = v.getWord().charAt(i);
 				char www = w.getWord().charAt(i);
 				

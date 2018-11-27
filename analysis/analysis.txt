@@ -1,11 +1,44 @@
-Put your name and netid here
+Karly Pearson netID: kep37;
 
 (1) Run the program BenchmarkForAutocomplete and copy/paste the 
 results here this for #matches = 20
 
+search	size	#match	binary	brute
+	456976	20	0.2215	0.0139
+a	17576	20	0.0175	0.0142
+b	17576	20	0.0217	0.0089
+c	17576	20	0.0210	0.0068
+x	17576	20	0.0160	0.0054
+y	17576	20	0.0146	0.0054
+z	17576	20	0.0169	0.0066
+aa	676	20	0.0117	0.0054
+az	676	20	0.0094	0.0064
+za	676	20	0.0100	0.0057
+zz	676	20	0.0100	0.0066
+
 (2) Run the program again for #matches = 10000, paste the results, 
 and then make any conclusions about how the # matches 
 effects the runtime. 
+
+search	size	#match	binary	brute
+	456976	1000	0.2195	0.0132
+a	17576	1000	0.0315	0.0242
+b	17576	1000	0.0114	0.0054
+c	17576	1000	0.0128	0.0046
+x	17576	1000	0.0121	0.0054
+y	17576	1000	0.0119	0.0062
+z	17576	1000	0.0172	0.0045
+aa	676	1000	0.0120	0.0047
+az	676	1000	0.0116	0.0041
+za	676	1000	0.0108	0.0044
+zz	676	1000	0.0134	0.0046
+
+# Of matches does not significantly impact the runtime. For example, 
+if you look at the data in the row of 'x', binary search runs in 	0.0160
+for binary and 0.0054 for brute for #20 matches while it runs 0.0121	0.0054
+for #1000 matches. Along with the other rows in the data, although there 
+are small differences, there are not enough to conclude that the number 
+of matches significantly impacts the runtime.  
 
 (3) Copy/paste the code from BruteAutocomplete.topMatches below. 
 Explain what the Big-Oh complexity of the entire loop: 
@@ -15,16 +48,106 @@ M, the number of terms that match the prefix.
 Assume that every priority-queue operation runs in O(log k) time. 
 Explain your answer which should be in terms of N, M, and k.
 
+	@Override
+	public List<Term> topMatches(String prefix, int k) {
+		if (k < 0) {
+			throw new IllegalArgumentException("Illegal value of k:"+k);
+		}
+		
+		// maintain pq of size k
+		PriorityQueue<Term> pq = new PriorityQueue<Term>(10, new Term.WeightOrder());
+		for (Term t : myTerms) {
+			if (!t.getWord().startsWith(prefix))
+				continue;
+			if (pq.size() < k) {
+				pq.add(t);
+			} else if (pq.peek().getWeight() < t.getWeight()) {
+				pq.remove();
+				pq.add(t);
+			}
+		}
+		int numResults = Math.min(k, pq.size());
+		LinkedList<Term> ret = new LinkedList<>();
+		for (int i = 0; i < numResults; i++) {
+			ret.addFirst(pq.remove());
+		}
+		return ret;
+	}
+}
+
+For the for loop for(Term t : myTerms) we know that the priority queue
+is a log k time. So we go through N times in the for loop and  
+only call the priority queue based upon the number of terms 
+we want (k). On the conditional statement we would do a log k for each match(M).
+So, the total runtime is N + M (log k). 
+
+
 (4) Explain why the last for loop in BruteAutocomplete.topMatches 
 uses a LinkedList (and not an ArrayList) 
 AND why the PriorityQueue uses Term.WeightOrder to get 
 the top k heaviest matches -- rather than 
 using Term.ReverseWeightOrder.
 
+The last for loop uses a LinkedList instead of an ArrayList in order
+to keep the action of .remove() an O(1) time. We wouldn't be able
+ to do this if we used an ArrayList because this would take 
+ O(N). In addition, the PriorityQueue uses Term.WeightOrder instead 
+ of Term.ReverseWeightOrder because the priority-queue takes off the
+  biggest order thing (heaviest weight). The linked list call further 
+ allows us to remove the first element of this and put it at the front 
+ of the head in the linked list. By going through the for loop and 
+ doing this repeatedly we get the order we want and wouldn't be able
+to achieve this if we used ReverseWeight Order.
+
 
 (5) Explain what the runtime of the 
 BinarySearchAutocomplete.topMatches code that you 
 implemented is by copy/pasting the code below 
 and explaining your answer in terms of N, M, and k.
+
+	@Override
+	public List<Term> topMatches(String prefix, int k) {
+		if(k<0) { throw new IllegalArgumentException();}
+		if(prefix == null) {
+			throw new NullPointerException("prefix is null");
+		}
+
+		ArrayList<Term> list = new ArrayList<>();
+		for(Term s : myTerms) {
+			list.add(s);
+		}
+		Comparator<Term> a = new Term.PrefixOrder(prefix.length());
+		Term newbie = new Term(prefix,0);
+		
+		ArrayList<Term> samePre = new ArrayList<>();
+		ArrayList<Term> returnlist = new ArrayList<>();
+	
+		int first = BinarySearchLibrary.firstIndex(list, newbie, a);
+		int last = BinarySearchLibrary.lastIndex(list, newbie, a);
+		
+		if(first == -1) {return samePre;}
+		for(int i = first; i <= last; i++) {
+			samePre.add(list.get(i));
+		}
+		Comparator<Term> c = new Term.ReverseWeightOrder();
+		samePre.sort(c);
+		
+		if(k > samePre.size()) {k = samePre.size();}
+		for(int i = 0; i < k; i++) {
+			returnlist.add(samePre.get(i));
+
+		}
+		return returnlist;
+	}
+}
+
+The Runtime for my TopMatches method is N+M+(log n) + K+(m log m). I have three independent
+for loops so we will be adding their Runtimes. So we go N number of times, we're 
+adding the binarysearches (first and last) which takes log n with M number of matches,
+ and then we are sorting through the matches we want at m log m and adding k, 
+ the number of terms we want.
+
+
+
 
 
